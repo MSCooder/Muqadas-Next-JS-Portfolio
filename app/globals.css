@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Font Variable link karein */
+  --font-sans: var(--font-jakarta);
+  
+  /* Custom Colors (Jo humne pehle discuss kiye) */
+  --color-hazel-green: #22c55e;
+  --color-aisa-black: #0a0a0a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Glassmorphism Effect for your Portfolio */
+@layer components {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.03); /* White with very low opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* White line effect */
+    border-radius: 999px; /* Pill shape like image */
   }
+
+  .neon-text {
+    color: #22c55e; /* Hazel Green */
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.7), 
+                 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+}
+
+/* Custom Bottom Border with Animation */
+@keyframes border-draw {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-border {
+  animation: border-draw 0.6s ease-out forwards;
+}
+
+:root {
+  --background: #0a0a0a; /* Aisa Black */
+  --foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom CSS for Orbiting Positioning */
+div[style*="--radius"] {
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  /* Complex transform to place icon on orbit path */
+  transform: translate(-50%, -50%) rotate(var(--start-angle)) translateY(calc(var(--radius) * -1)) rotate(calc(var(--start-angle) * -1));
 }
